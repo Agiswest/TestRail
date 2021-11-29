@@ -1,6 +1,7 @@
 package pages;
 
 import models.Project;
+import wrappers.Input;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
@@ -8,8 +9,8 @@ import static com.codeborne.selenide.Selenide.$x;
 public class CreateProjectPage extends BasePage {
 
     public void fillInfoOfProject(Project project) {
-        $("#name").sendKeys(project.getName());
-        $("#announcement").sendKeys(project.getAnnouncement());
+        new Input("name").addText(project.getName());
+        new Input("announcement").addText(project.getAnnouncement());
         if (project.isShowAnnouncement()) {
             $("#show_announcement").click();
         }

@@ -1,5 +1,7 @@
 package tests;
 
+import models.Case;
+import models.CaseFactory;
 import org.testng.annotations.Test;
 import pages.*;
 
@@ -15,6 +17,8 @@ public class LoginTest extends BaseTest {
         TestSuitesAndCasesPage testSuitesAndCasesPage = new TestSuitesAndCasesPage();
         testSuitesAndCasesPage.openPage();
         testSuitesAndCasesPage.addCase();
-
+        CreateCasePage createCasePage = new CreateCasePage();
+        Case caseData = CaseFactory.get();
+        createCasePage.fillInfo(caseData);
     }
 }
