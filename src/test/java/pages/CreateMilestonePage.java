@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class CreateMilestonePage extends BasePage {
 
-    public void fillInfo(Milestone milestone) {
+    public CreateMilestonePage fillInfo(Milestone milestone) {
         new Input("name").addText(milestone.getName());
         new Input("reference").addText(milestone.getReferences());
         new Input("description_display").addText(milestone.getDescription());
@@ -17,13 +17,16 @@ public class CreateMilestonePage extends BasePage {
         if (milestone.isCompleted()) {
             $("#is_completed").click();
         }
+        return this;
     }
 
-    public void addParentMilestone(String milestoneName) {
+    public CreateMilestonePage addParentMilestone(String milestoneName) {
         new Dropdown("Parent").selectOption(milestoneName);
+        return this;
     }
 
-    public void saveMilestone() {
+    public MilestonesPage saveMilestone() {
         $("#accept").click();
+        return new MilestonesPage();
     }
 }

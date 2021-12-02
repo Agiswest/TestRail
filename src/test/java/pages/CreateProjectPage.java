@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class CreateProjectPage extends BasePage {
 
-    public void fillInfoOfProject(Project project) {
+    public AdminProjectsPage fillInfoOfProject(Project project) {
         new Input("name").addText(project.getName());
         new Input("announcement").addText(project.getAnnouncement());
         if (project.isShowAnnouncement()) {
@@ -16,5 +16,12 @@ public class CreateProjectPage extends BasePage {
         }
         $x(String.format("//*[contains(@id,'suite_mode_%s')]", project.getSuiteMode())).click();
         $("#accept").click();
+        return new AdminProjectsPage();
+    }
+
+    public AdminProjectsPage editProjectName(String projectName) {
+        new Input("name").addText(projectName);
+        $("#accept").click();
+        return new AdminProjectsPage();
     }
 }

@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class CreateCasePage extends BasePage {
 
-    public void fillInfo(Case caseData) {
+    public TestCaseDetailsPage fillInfo(Case caseData) {
         new Input("title").addText(caseData.getTitle());
         new Input("estimate").addText(caseData.getEstimate());
         new Input("refs").addText(caseData.getReferences());
@@ -21,5 +21,6 @@ public class CreateCasePage extends BasePage {
         new Input("custom_steps_display").addText(caseData.getSteps());
         new Input("custom_expected_display").addText(caseData.getExpectedResult());
         $("#accept").click();
+        return new TestCaseDetailsPage();
     }
 }

@@ -1,7 +1,6 @@
 package tests;
 
-import models.Case;
-import models.CaseFactory;
+import com.github.javafaker.Faker;
 import org.testng.annotations.Test;
 import pages.*;
 
@@ -15,10 +14,11 @@ public class LoginTest extends BaseTest {
         ProjectsPage projectsPage = new ProjectsPage();
         projectsPage.openProject("blabla");
         TestSuitesAndCasesPage testSuitesAndCasesPage = new TestSuitesAndCasesPage();
-        testSuitesAndCasesPage.openPage();
-        testSuitesAndCasesPage.addCase();
-        CreateCasePage createCasePage = new CreateCasePage();
-        Case caseData = CaseFactory.get();
-        createCasePage.fillInfo(caseData);
+        String sectionName = new Faker().name().username();
+        testSuitesAndCasesPage
+                .openPage()
+                .addCaseSection(sectionName);
+        testSuitesAndCasesPage.caseSectionIsCreated(sectionName);
+
     }
 }
