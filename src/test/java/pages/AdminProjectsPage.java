@@ -1,9 +1,12 @@
 package pages;
 
+import io.qameta.allure.Step;
+
 import static com.codeborne.selenide.Selenide.*;
 
 public class AdminProjectsPage extends BasePage {
 
+    @Step("Delete project {projectName}")
     public AdminProjectsPage deleteProject(String projectName) {
         $x(String.format("//a[contains(text(),'%s')]" +
                 "/ancestor::tr[contains(@class,'hoverSensitive')]" +
@@ -15,6 +18,7 @@ public class AdminProjectsPage extends BasePage {
         return this;
     }
 
+    @Step("Rename {projectName} into {newProjectName}")
     public void editProjectName(String projectName, String newProjectName) {
         $x(String.format("//a[contains(text(),'%s')]", projectName)).click();
         new CreateProjectPage().editProjectName(newProjectName);

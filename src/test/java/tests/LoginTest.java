@@ -12,11 +12,11 @@ public class LoginTest extends BaseTest {
         loginPage.open();
         loginPage.login(user, password);
         ProjectsPage projectsPage = new ProjectsPage();
-        projectsPage.openProject("blabla");
+        projectsPage.openProjectByUrl("TestExampleProject");
         TestSuitesAndCasesPage testSuitesAndCasesPage = new TestSuitesAndCasesPage();
         String sectionName = new Faker().name().username();
         testSuitesAndCasesPage
-                .openPage()
+                .open()
                 .addCaseSection(sectionName);
         testSuitesAndCasesPage.caseSectionIsCreated(sectionName);
 

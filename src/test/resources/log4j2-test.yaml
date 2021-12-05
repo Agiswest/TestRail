@@ -1,0 +1,55 @@
+Configuration:
+  Properties:
+    property:
+      - name: "logLvl"
+        value: "DEBUG"
+      - name: "logLvlEbeanInternal"
+        value: "WARN"
+      - name: "logDir"
+        value: "target/logs"
+      - name: "stdErrThreshold"
+        value: "WARN"
+        # initial uuid for initialization logging
+      - name: "uuid"
+        value: "00000000-0000-0000-0000-000000000000"
+  Appenders:
+    Routing:
+      - name: Test
+        Routes:
+          pattern: "$${ctx:uuid}"
+          Route:
+            RollingFile:
+              immediateFlush: true
+              append: false
+              name: "RollingFile-${ctx:uuid}"
+              fileName: "${logDir}/test-${ctx:uuid}.log"
+              filePattern: "${logDir}/%d{yyyy-MM-dd}/archived_%d{HH-mm}-${ctx:uuid}.log"
+              PatternLayout:
+                pattern: '%d{yyyy-MM-dd HH:mm:ss:SSS} [%t] %-5level [%c] - %msg%n'
+              Policies:
+                - OnStartupTriggeringPolicy
+    Console:
+      - name: Stdout
+        PatternLayout:
+          pattern: '%d{yyyy-MM-dd HH:mm:ss:SSS} [%t] %-5level [%c] - %msg%n'
+        target: SYSTEM_OUT
+        Filters:
+          ThresholdFilter:
+            level: "${sys:stdErrThreshold}"
+            onMatch: DENY
+            onMisMatch: ACCEPT
+
+      - name: Stderr
+        PatternLayout:
+          pattern: '%d{yyyy-MM-dd HH:mm:ss:SSS} [%t] %-5level [%c] - %msg%n'
+        Filters:
+          ThresholdFilter:
+            level: "${sys:stdErrThreshold}"
+        target: SYSTEM_ERR
+  Loggers:
+    Root:
+      AppenderRef:
+        - ref: Stdout
+        - ref: Stderr
+        - ref: Test
+      level: "${sys:logLvl}"

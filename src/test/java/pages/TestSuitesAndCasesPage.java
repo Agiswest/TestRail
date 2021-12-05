@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import wrappers.Input;
@@ -14,17 +15,20 @@ import static org.testng.Assert.assertFalse;
 
 public class TestSuitesAndCasesPage extends BasePage {
 
-    public TestSuitesAndCasesPage openPage() {
+    @Step("Open test suites and cases page")
+    public TestSuitesAndCasesPage open() {
         projectNavigation.navigateTo("suites");
         return new TestSuitesAndCasesPage();
     }
 
+    @Step("Create new case")
     public CreateCasePage addCase() {
         Sidebar sidebar = new Sidebar("cases");
         sidebar.selectOption("add");
         return new CreateCasePage();
     }
 
+    @Step("Delete case {caseName}")
     public TestSuitesAndCasesPage deleteCase(String caseName) {
         Collection<SelenideElement> numberOfCases = $$(".caseRow");
         assertFalse(numberOfCases.isEmpty(), "There are no test cases to delete");
@@ -42,6 +46,7 @@ public class TestSuitesAndCasesPage extends BasePage {
         return new TestSuitesAndCasesPage();
     }
 
+    @Step("Add case section {sectionName}")
     public void addCaseSection(String sectionName) {
         $(By.id("addSection")).click();
         new Input("editSectionName").addText(sectionName);

@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import models.Project;
 import wrappers.Input;
 
@@ -8,6 +9,7 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class CreateProjectPage extends BasePage {
 
+    @Step("Fill info of project")
     public AdminProjectsPage fillInfoOfProject(Project project) {
         new Input("name").addText(project.getName());
         new Input("announcement").addText(project.getAnnouncement());

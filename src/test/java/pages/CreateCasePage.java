@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import models.Case;
 import wrappers.Dropdown;
 import wrappers.Input;
@@ -8,6 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class CreateCasePage extends BasePage {
 
+    @Step("Fill info of case")
     public TestCaseDetailsPage fillInfo(Case caseData) {
         new Input("title").addText(caseData.getTitle());
         new Input("estimate").addText(caseData.getEstimate());
