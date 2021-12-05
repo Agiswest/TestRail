@@ -13,7 +13,7 @@ public class ProjectFactory {
                 .name(faker.name().fullName())
                 .announcement(faker.backToTheFuture().quote())
                 .showAnnouncement(new Random().nextBoolean())
-                .suiteMode(suiteMode[0 /*new Random().nextInt(3)-1*/])
+                .suiteMode(suiteMode[0])
                 .build();
     }
 }

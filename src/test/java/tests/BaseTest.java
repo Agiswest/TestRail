@@ -2,7 +2,6 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
-import com.codeborne.selenide.logevents.SelenideLogger;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import utils.PropertyReader;
@@ -26,8 +25,8 @@ public class BaseTest {
                 PropertyReader.getProperty("testrail.pass"));
     }
 
-    /*@AfterMethod
+    @AfterMethod
     public void closeDriver() {
         WebDriverRunner.closeWebDriver();
-    }*/
+    }
 }

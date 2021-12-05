@@ -4,8 +4,9 @@ import wrappers.ProjectNavigation;
 
 public class TestRunsPage extends BasePage {
 
-    public void openTestRunsPage() {
+    public TestRunsPage openTestRunsPage() {
         projectNavigation.navigateTo("runs");
+        return new TestRunsPage();
     }
 
     public void addRun() {

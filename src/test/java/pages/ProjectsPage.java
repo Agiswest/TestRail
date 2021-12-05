@@ -9,12 +9,14 @@ public class ProjectsPage extends BasePage {
             "descendant::a[contains(text(),'%s')]";
     private static final String CREATE_NEW_PROJECT_BUTTON = "#sidebar-projects-add";
 
-    public void openProject(String projectName) {
+    public OverviewPage openProject(String projectName) {
         $("body").sendKeys(Keys.CONTROL, Keys.END);
         $x(String.format(PROJECT_LOCATOR, projectName)).click();
+        return new OverviewPage();
     }
 
-    public void createNewProject() {
+    public CreateProjectPage createNewProject() {
         $(CREATE_NEW_PROJECT_BUTTON).click();
+        return new CreateProjectPage();
     }
 }

@@ -2,12 +2,11 @@ package pages;
 
 import wrappers.Sidebar;
 
-import static com.codeborne.selenide.Selenide.$;
-
 public class OverviewPage extends BasePage {
 
-    public void openPage() {
+    public OverviewPage openPage() {
         projectNavigation.navigateTo("projects");
+        return new OverviewPage();
     }
 
     public void selectSidebarOptionForTestCases(String option) {
@@ -23,9 +22,5 @@ public class OverviewPage extends BasePage {
     public void selectSidebarOptionForMilestones(String option) {
         Sidebar sidebar = new Sidebar("milestones");
         sidebar.selectOption(option);
-    }
-
-    public void editProject() {
-        $(".button-edit").click();
     }
 }
