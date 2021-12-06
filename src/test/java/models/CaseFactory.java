@@ -17,7 +17,7 @@ public class CaseFactory {
                 .template("Test Case (Text)")
                 .type(caseTypes[faker.random().nextInt(0,11)])
                 .priority(casePriorities[faker.random().nextInt(0,3)])
-                .estimate(faker.number().digit())
+                .estimate(faker.random().nextInt(1, 50).toString())
                 .references(faker.internet().url())
                 .automationType("None")
                 .preconditions(faker.chuckNorris().fact())

@@ -1,23 +1,14 @@
 package pages;
 
-import models.Case;
+import lombok.extern.log4j.Log4j2;
 
-import static com.codeborne.selenide.Selenide.$$x;
+import static com.codeborne.selenide.Selenide.$x;
 
-public class TestCaseDetailsPage {
+@Log4j2
+public class TestCaseDetailsPage extends BasePage {
 
-    public boolean dataOfCaseIsValid(Case caseData) {
-        final String dataLocator = "//*[contains(text(),\"%s\")]";
-        final String[] caseDataMass = {caseData.getTitle(), caseData.getType(), caseData.getPriority(),
-                caseData.getEstimate(), caseData.getTemplate(), caseData.getSteps(), caseData.getSection(),
-                caseData.getReferences(), caseData.getPreconditions(), caseData.getExpectedResult(),
-                caseData.getAutomationType()};
-        boolean caseDataIsValid = true;
-        for (String a : caseDataMass) {
-            if ($$x(String.format(dataLocator, a)).size() == 0) {
-             caseDataIsValid = false;
-            }
-        }
-        return caseDataIsValid;
+    public String getConfirmationMessage() {
+        log.info("Get confirmation message");
+        return $x("//div[contains(@class,'message-success')][normalize-space(.)]").getText();
     }
 }
