@@ -14,18 +14,18 @@ public class LoginPage extends BasePage {
 
     @Step("Open login page")
     public LoginPage open() {
+        log.info("Login page is opened");
         Selenide.open("auth/login");
         $(PASSWORD_INPUT).shouldBe(Condition.visible);
-        log.info("Login page is opened");
         return this;
     }
 
     @Step("Login using credentials: username - {user}, password - {pass}")
     public ProjectsPage login(String user, String pass) {
+        log.info("Login by user: {}, password: {}", user, pass);
         $(EMAIL_INPUT).sendKeys(user);
         $(PASSWORD_INPUT).sendKeys(pass);
         $(PASSWORD_INPUT).submit();
-        log.info("Login by user: {}, password: {}", user, pass);
         return new ProjectsPage();
     }
 }

@@ -3,6 +3,7 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import wrappers.Input;
@@ -13,16 +14,19 @@ import java.util.Collection;
 import static com.codeborne.selenide.Selenide.*;
 import static org.testng.Assert.assertFalse;
 
+@Log4j2
 public class TestSuitesAndCasesPage extends BasePage {
 
     @Step("Open test suites and cases page")
     public TestSuitesAndCasesPage open() {
+        log.info("Open test suites and cases page");
         projectNavigation.navigateTo("suites");
         return new TestSuitesAndCasesPage();
     }
 
     @Step("Create new case")
     public CreateCasePage addCase() {
+        log.info("Create new case");
         Sidebar sidebar = new Sidebar("cases");
         sidebar.selectOption("add");
         return new CreateCasePage();
@@ -30,6 +34,7 @@ public class TestSuitesAndCasesPage extends BasePage {
 
     @Step("Delete case {caseName}")
     public TestSuitesAndCasesPage deleteCase(String caseName) {
+        log.info("Delete case'{}'", caseName);
         Collection<SelenideElement> numberOfCases = $$(".caseRow");
         assertFalse(numberOfCases.isEmpty(), "There are no test cases to delete");
 
@@ -48,6 +53,7 @@ public class TestSuitesAndCasesPage extends BasePage {
 
     @Step("Add case section {sectionName}")
     public void addCaseSection(String sectionName) {
+        log.info("Add section '{}'", sectionName);
         $(By.id("addSection")).click();
         new Input("editSectionName").addText(sectionName);
         $(By.id("editSectionName")).submit();
