@@ -6,6 +6,7 @@ import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Selenide.*;
+import static org.testng.Assert.assertNotNull;
 
 @Log4j2
 public class ProjectsPage extends BasePage {
@@ -25,7 +26,7 @@ public class ProjectsPage extends BasePage {
     public OverviewPage openProjectByUrl(String projectName) {
         log.info("Open project '{}' by link", projectName);
         String attributeText = $x(String.format(PROJECT_LOCATOR, projectName)).getAttribute("href");
-        assert attributeText != null;
+        assertNotNull(attributeText, "Attribute 'href' does not exist or has changed");
         String[] linkComponents = attributeText.split("/");
         String idOfProject = linkComponents[6];
         Selenide.open("projects/overview/" + idOfProject);

@@ -13,7 +13,7 @@ public class CreateMilestonePage extends BasePage {
 
     @Step("Fill info of milestone")
     public CreateMilestonePage fillInfo(Milestone milestone) {
-        log.info("Fill info of milestone by data '{}'", milestone);
+        log.info("Fill info of milestone by data \"{}\"", milestone);
         new Input("name").addText(milestone.getName());
         new Input("reference").addText(milestone.getReferences());
         new Input("description_display").addText(milestone.getDescription());

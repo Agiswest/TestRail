@@ -13,7 +13,7 @@ public class CreateCasePage extends BasePage {
 
     @Step("Fill info of case")
     public TestCaseDetailsPage fillInfo(Case caseData) {
-        log.info("Fill info of case by case data '{}'", caseData);
+        log.info("Fill info of case by case data \"{}\"", caseData);
         new Input("title").addText(caseData.getTitle());
         new Input("estimate").addText(caseData.getEstimate());
         new Input("refs").addText(caseData.getReferences());

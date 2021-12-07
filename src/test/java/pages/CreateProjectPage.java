@@ -13,7 +13,7 @@ public class CreateProjectPage extends BasePage {
 
     @Step("Fill info of project")
     public AdminProjectsPage fillInfoOfProject(Project project) {
-        log.info("Fill info of project by data '{}'", project);
+        log.info("Fill info of project by data \"{}\"", project);
         new Input("name").addText(project.getName());
         new Input("announcement").addText(project.getAnnouncement());
         if (project.isShowAnnouncement()) {
