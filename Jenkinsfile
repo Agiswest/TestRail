@@ -18,6 +18,8 @@ pipeline {
                 git branch: "${params.BRANCH}", url: 'https://github.com/Agiswest/TestRail'
 
                 // Run Maven on a Unix agent.
+                apt update
+                apt install libnss
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
 
                 // To run Maven on a Windows agent, use
