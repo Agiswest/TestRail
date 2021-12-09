@@ -6,6 +6,8 @@ import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.apache.logging.log4j.ThreadContext;
+import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import utils.PropertyReader;
@@ -22,6 +24,9 @@ public class BaseTest {
         String methodName = method.getName();
         ThreadContext.put("uuid", methodName);
         Configuration.timeout = 10000;
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
+        Configuration.browserCapabilities = chromeOptions;
         Configuration.browser = "chrome";
         Configuration.baseUrl = System.getenv().getOrDefault("TESTRAIL_URL",
                 PropertyReader.getProperty("testrail.url"));
