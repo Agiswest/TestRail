@@ -1,7 +1,5 @@
 package tests;
 
-import adapters.BaseAdapter;
-import adapters.ProjectAdapter;
 import com.github.javafaker.Faker;
 import models.*;
 import org.testng.annotations.Test;
