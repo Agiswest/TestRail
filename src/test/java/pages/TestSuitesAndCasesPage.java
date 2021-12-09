@@ -54,7 +54,11 @@ public class TestSuitesAndCasesPage extends BasePage {
     @Step("Add case section {sectionName}")
     public void addCaseSection(String sectionName) {
         log.info("Add section '{}'", sectionName);
-        $(By.id("addSection")).click();
+        if ($(By.id("addSection")).isDisplayed()) {
+            $(By.id("addSection")).click();
+        } else {
+            $(By.id("addSectionInline")).click();
+        }
         new Input("editSectionName").addText(sectionName);
         $(By.id("editSectionName")).submit();
     }

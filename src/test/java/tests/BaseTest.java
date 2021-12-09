@@ -1,5 +1,6 @@
 package tests;
 
+import adapters.ProjectAdapter;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.SelenideLogger;
@@ -14,6 +15,7 @@ import java.lang.reflect.Method;
 public class BaseTest {
     String user;
     String password;
+    ProjectAdapter projectAdapter;
 
     @BeforeMethod
     public void setup(Method method) {
@@ -30,6 +32,7 @@ public class BaseTest {
                 PropertyReader.getProperty("testrail.user"));
         password = System.getenv().getOrDefault("TESTRAIL_PASS",
                 PropertyReader.getProperty("testrail.pass"));
+        projectAdapter = new ProjectAdapter();
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .includeSelenideSteps(false)
                 .screenshots(true));
