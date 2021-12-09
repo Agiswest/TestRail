@@ -6,7 +6,6 @@ pipeline {
         maven "M3"
     }
     parameters {
-        booleanParam(name: 'HEADLESS', defaultValue: true, description: 'Headless browser')
         gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type:
         'PT_BRANCH'
     }
@@ -18,7 +17,7 @@ pipeline {
                 git branch: "${params.BRANCH}", url: 'https://github.com/Agiswest/TestRail'
 
                 // Run Maven on a Unix agent.
-                sh "mvn -Dmaven.test.failure.ignore=true clean package"
+                sh "mvn clean test"
 
                 // To run Maven on a Windows agent, use
                 // bat "mvn clean test -Dheadless=${HEADLESS}"
