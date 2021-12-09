@@ -31,7 +31,7 @@ public class BaseTest {
         Configuration.baseUrl = System.getenv().getOrDefault("TESTRAIL_URL",
                 PropertyReader.getProperty("testrail.url"));
         Configuration.startMaximized = true;
-        Configuration.headless = false;
+        Configuration.headless = true;
         Configuration.clickViaJs = false;
         user = System.getenv().getOrDefault("TESTRAIL_USER",
                 PropertyReader.getProperty("testrail.user"));
