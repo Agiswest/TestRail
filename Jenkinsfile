@@ -18,7 +18,6 @@ pipeline {
                 git branch: "${params.BRANCH}", url: 'https://github.com/Agiswest/TestRail'
 
                 // Run Maven on a Unix agent.
-                sudo apt install libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
 
                 // To run Maven on a Windows agent, use
