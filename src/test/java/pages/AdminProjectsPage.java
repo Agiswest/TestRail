@@ -4,6 +4,7 @@ import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 
 import static com.codeborne.selenide.Selenide.*;
+import static org.testng.Assert.assertNotNull;
 
 @Log4j2
 public class AdminProjectsPage extends BasePage {
@@ -21,18 +22,27 @@ public class AdminProjectsPage extends BasePage {
         return this;
     }
 
+    public String getIdOfProject(String projectName) {
+        String attributeText = $x(String.format("//a[contains(text(),'%s')]", projectName))
+                .getAttribute("href");
+        assertNotNull(attributeText);
+        String[] linkComponents = attributeText.split("/");
+        return linkComponents[7];
+    }
+
     @Step("Rename {projectName} into {newProjectName}")
-    public void editProjectName(String projectName, String newProjectName) {
+    public AdminProjectsPage editProjectName(String projectName, String newProjectName) {
         log.info("Rename project '{}' into '{}'", projectName, newProjectName);
         $x(String.format("//a[contains(text(),'%s')]", projectName)).click();
         new CreateProjectPage().editProjectName(newProjectName);
+        return this;
     }
 
     public String getSuccessMessage() {
         return $(".message-success").getText();
     }
 
-    public boolean projectExists(String projectName) {
+    public boolean isProjectExists(String projectName) {
         log.info("Project '{}' exists", projectName);
         return $$x(String.format("//tr[contains(@class,'hoverSensitive')]" +
                 "//a[contains(text(),'%s')][normalize-space(.)]", projectName)).size() != 0;

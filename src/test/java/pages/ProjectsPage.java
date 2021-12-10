@@ -13,6 +13,11 @@ public class ProjectsPage extends BasePage {
             "descendant::a[contains(text(),'%s')]";
     private static final String CREATE_NEW_PROJECT_BUTTON = "#sidebar-projects-add";
 
+    public boolean isProjectTitleVisible() {
+        log.info("Is projects page title visible");
+        return $x("//div[contains(text(),'All Projects')]").isDisplayed();
+    }
+
     @Step("Open project {projectName}")
     public OverviewPage openProjectByClick(String projectName) {
         log.info("Open project '{}' by click", projectName);

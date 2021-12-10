@@ -3,6 +3,8 @@ package pages;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 
+import static com.codeborne.selenide.Selenide.$;
+
 @Log4j2
 public class MilestonesPage extends BasePage {
     private final String pageName = "milestones";
@@ -19,5 +21,9 @@ public class MilestonesPage extends BasePage {
         log.info("Create new milestone");
         projectNavigation.navigateTo(String.format("%s-%s", pageName, "add"));
         return new CreateMilestonePage();
+    }
+
+    public String getSuccessMessage() {
+        return $(".message-success").getText();
     }
 }

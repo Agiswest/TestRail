@@ -1,5 +1,6 @@
 package pages;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Step;
@@ -32,12 +33,14 @@ public class TestSuitesAndCasesPage extends BasePage {
         return new CreateCasePage();
     }
 
+    public boolean isCaseExists(String caseTitle) {
+        $("span.title").shouldBe(Condition.visible);
+        return $$x(String.format("//span[contains(text(),'%s')]", caseTitle)).size() != 0;
+    }
+
     @Step("Delete case {caseName}")
     public TestSuitesAndCasesPage deleteCase(String caseName) {
         log.info("Delete case'{}'", caseName);
-        Collection<SelenideElement> numberOfCases = $$(".caseRow");
-        assertFalse(numberOfCases.isEmpty(), "There are no test cases to delete");
-
         Actions actions = new Actions(WebDriverRunner.getWebDriver());
         actions
                 .moveToElement($x(String.format("//tr[contains(@class,'caseRow')]" +
@@ -48,6 +51,8 @@ public class TestSuitesAndCasesPage extends BasePage {
                 .perform();
         $x("(//a[contains(text(),'Delete Permanently')])[2]").click();
         $x("(//a[contains(text(),'Delete Permanently')])[2]").click();
+        $x(String.format("//tr[contains(@class,'caseRow')]" +
+                "/descendant::span[contains(text(),'%s')]", caseName)).shouldNotBe(Condition.exist);
         return new TestSuitesAndCasesPage();
     }
 
@@ -61,9 +66,11 @@ public class TestSuitesAndCasesPage extends BasePage {
         }
         new Input("editSectionName").addText(sectionName);
         $(By.id("editSectionName")).submit();
+        $x(String.format("//div[@class='grid-title']/span[contains(text(),'%s')]",
+                sectionName)).shouldBe(Condition.visible);
     }
 
-    public boolean caseSectionIsCreated(String sectionName) {
+    public boolean isCaseSectionCreated(String sectionName) {
         return $$x(String.format("//span[contains(@id,'sectionName')]" +
                 "[contains(text(),'%s')]", sectionName)).size() != 0;
     }
