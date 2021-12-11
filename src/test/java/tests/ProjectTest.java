@@ -12,12 +12,12 @@ public class ProjectTest extends BaseTest {
     public void createProjectTest() {
         project = ProjectFactory.get();
         boolean projectExists =
-        loginPage
-                .open()
-                .login(user, password)
-                .createNewProject()
-                .fillInfoOfProject(project)
-                .isProjectExists(project.getName());
+                loginPage
+                        .open()
+                        .login(user, password)
+                        .createNewProject()
+                        .fillInfoOfProject(project)
+                        .isProjectExists(project.getName());
         Assert.assertTrue(projectExists, "Project wasn't created");
         project.setId(adminProjectsPage.getIdOfProject(project.getName()));
         Assert.assertEquals(adminProjectsPage.getSuccessMessage(),

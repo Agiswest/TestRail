@@ -12,7 +12,7 @@ public class ProjectAdapter extends BaseAdapter {
     }
 
     public void deleteProject(String projectId) {
-        post("","delete_project/" + projectId);
+        post("", "delete_project/" + projectId);
     }
 
     public Project getProject(String projectId) {

@@ -20,12 +20,12 @@ public class MilestoneTest extends BaseTest {
                 .login(user, password)
                 .openProjectByUrl(project.getName(), project.getId());
         String successMessage =
-        milestonesPage
-                .open()
-                .addMilestone()
-                .fillInfo(milestone)
-                .saveMilestone()
-                .getSuccessMessage();
+                milestonesPage
+                        .open()
+                        .addMilestone()
+                        .fillInfo(milestone)
+                        .saveMilestone()
+                        .getSuccessMessage();
         Assert.assertEquals(successMessage, "Successfully added the new milestone.",
                 "Milestone not created");
     }
