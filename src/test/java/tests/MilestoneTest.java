@@ -28,5 +28,6 @@ public class MilestoneTest extends BaseTest {
                         .getSuccessMessage();
         Assert.assertEquals(successMessage, "Successfully added the new milestone.",
                 "Milestone not created");
+        projectAdapter.deleteProject(project.getId());
     }
 }
