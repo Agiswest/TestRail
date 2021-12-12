@@ -12,6 +12,12 @@ public class ProjectsPage extends BasePage {
     private static final String PROJECT_LOCATOR = "//div[contains(@id,'project')]/" +
             "descendant::a[contains(text(),'%s')]";
     private static final String CREATE_NEW_PROJECT_BUTTON = "#sidebar-projects-add";
+    private static final String PAGE_TITLE = "//div[contains(text(),'All Projects')]";
+
+    public boolean isProjectTitleVisible() {
+        log.info("Is projects page title visible");
+        return $x(PAGE_TITLE).isDisplayed();
+    }
 
     @Step("Open project {projectName}")
     public OverviewPage openProjectByClick(String projectName) {

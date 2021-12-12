@@ -8,6 +8,7 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.apache.logging.log4j.ThreadContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import pages.*;
 import utils.PropertyReader;
 
 import java.lang.reflect.Method;
@@ -16,6 +17,11 @@ public class BaseTest {
     String user;
     String password;
     ProjectAdapter projectAdapter;
+    AdminProjectsPage adminProjectsPage;
+    LoginPage loginPage;
+    MilestonesPage milestonesPage;
+    TestSuitesAndCasesPage testSuitesAndCasesPage;
+    TestCaseDetailsPage caseDetailsPage;
 
     @BeforeMethod
     public void setup(Method method) {
@@ -33,6 +39,11 @@ public class BaseTest {
         password = System.getenv().getOrDefault("TESTRAIL_PASS",
                 PropertyReader.getProperty("testrail.pass"));
         projectAdapter = new ProjectAdapter();
+        adminProjectsPage = new AdminProjectsPage();
+        loginPage = new LoginPage();
+        milestonesPage = new MilestonesPage();
+        testSuitesAndCasesPage = new TestSuitesAndCasesPage();
+        caseDetailsPage = new TestCaseDetailsPage();
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .includeSelenideSteps(false)
                 .screenshots(true));

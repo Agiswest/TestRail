@@ -10,6 +10,8 @@ import static com.codeborne.selenide.Selenide.$x;
 
 @Log4j2
 public class CreateProjectPage extends BasePage {
+    private static final String SUITE_MODE_LOCATOR = "//*[contains(@id,'suite_mode_%s')]";
+    private final String SAVE_PROJECT_BUTTON = "#accept";
 
     @Step("Fill info of project")
     public AdminProjectsPage fillInfoOfProject(Project project) {
@@ -19,15 +21,14 @@ public class CreateProjectPage extends BasePage {
         if (project.isShowAnnouncement()) {
             $("#show_announcement").click();
         }
-        $x(String.format("//*[contains(@id,'suite_mode_%s')]", project.getSuiteMode())).click();
-        $("#accept").click();
+        $x(String.format(SUITE_MODE_LOCATOR, project.getSuiteMode())).click();
+        $(SAVE_PROJECT_BUTTON).click();
         return new AdminProjectsPage();
     }
 
-    public AdminProjectsPage editProjectName(String projectName) {
+    public void editProjectName(String projectName) {
         log.info("Rename project with new name '{}'", projectName);
         new Input("name").addText(projectName);
-        $("#accept").click();
-        return new AdminProjectsPage();
+        $(SAVE_PROJECT_BUTTON).click();
     }
 }

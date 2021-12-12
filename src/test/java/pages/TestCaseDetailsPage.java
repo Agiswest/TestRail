@@ -6,9 +6,11 @@ import static com.codeborne.selenide.Selenide.$x;
 
 @Log4j2
 public class TestCaseDetailsPage extends BasePage {
+    private static final String MESSAGE_LOCATOR = "//div[contains(@class,'message-success')]" +
+            "[normalize-space(.)]";
 
     public String getConfirmationMessage() {
         log.info("Get confirmation message");
-        return $x("//div[contains(@class,'message-success')][normalize-space(.)]").getText();
+        return $x(MESSAGE_LOCATOR).getText();
     }
 }

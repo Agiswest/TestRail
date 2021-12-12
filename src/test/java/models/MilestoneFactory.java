@@ -21,8 +21,8 @@ public class MilestoneFactory {
     private static String getRandomDate() {
         Random random = new Random();
         final String dateFormat = "%d/%d/%d";
-        final int randomMonth = random.nextInt(12);
-        final int randomDay = random.nextInt(28);
+        final int randomMonth = random.nextInt(11) + 1;
+        final int randomDay = random.nextInt(27) + 1;
         final int randomYear = random.nextInt(5) + 2020;
         return String.format(dateFormat, randomMonth, randomDay, randomYear);
     }
